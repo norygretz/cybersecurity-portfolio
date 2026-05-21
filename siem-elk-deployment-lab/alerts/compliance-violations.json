@@ -1,0 +1,15 @@
+{
+  "name": "Compliance Violations Alert",
+  "description": "Flags violations of audit and data access policies for compliance teams.",
+  "conditions": [
+    {
+      "type": "match",
+      "query": "compliance.result:fail OR policy.violation:true"
+    }
+  ],
+  "actions": [
+    { "type": "email", "to": ["compliance-team@example.com"] },
+    { "type": "slack", "channel": "#security-compliance" }
+  ],
+  "severity": "high"
+}

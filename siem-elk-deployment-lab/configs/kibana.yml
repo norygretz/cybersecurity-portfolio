@@ -1,0 +1,36 @@
+# Kibana configuration for SIEM dashboard
+
+server.host: "0.0.0.0"
+server.port: 5601
+server.name: "siem-kibana"
+
+elasticsearch.hosts: ["https://localhost:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "${KIBANA_PASSWORD}"
+
+elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca.crt"]
+elasticsearch.ssl.verificationMode: full
+
+server.ssl.enabled: true
+server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
+server.ssl.key: "/etc/kibana/certs/kibana.key"
+
+xpack.security.enabled: true
+xpack.encryptedSavedObjects.enabled: true
+xpack.encryptedSavedObjects.encryptionKey: "CHANGE_ME_REPLACE_WITH_SECURE_KEY"
+
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+
+logging.root.level: info
+logging.dest: /var/log/kibana/kibana.log
+
+xpack.reporting.enabled: true
+
+# Allow snapshot restore (if needed for backups)
+server.publicBaseUrl: "https://your-kibana-host:5601"
+
+# Space settings
+kibana.defaultAppId: "discover"
+
+# Saved objects migration settings
+xpack.savedObjects.migrations.version: 8.0.0

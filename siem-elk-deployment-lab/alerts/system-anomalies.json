@@ -1,0 +1,17 @@
+{
+  "name": "System Anomalies Alert",
+  "description": "Detects anomalous system behavior such as resource spikes or unusual process activity.",
+  "conditions": [
+    {
+      "type": "threshold",
+      "query": "system.cpu.total.pct:>0.9 OR system.memory.used.pct:>0.9",
+      "threshold": 1,
+      "timeframe": "1m"
+    }
+  ],
+  "actions": [
+    { "type": "email", "to": ["ops-team@example.com"] },
+    { "type": "pagerduty", "service_key": "PAGERDUTY_KEY_PLACEHOLDER" }
+  ],
+  "severity": "medium"
+}

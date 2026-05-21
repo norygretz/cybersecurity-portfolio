@@ -1,0 +1,11 @@
+{
+  "title": "Infrastructure Health",
+  "description": "Dashboard monitoring Elasticsearch, Logstash, and Kibana performance.",
+  "panels": [
+    { "type": "metric", "title": "Elasticsearch Nodes Online", "field": "elasticsearch.node.status" },
+    { "type": "timeseries", "title": "Logstash Events per Second", "field": "logstash.events.per_second" },
+    { "type": "bar", "title": "Disk Utilization", "fields": ["host.name", "system.disk.used.percent"] },
+    { "type": "table", "title": "Kibana Sessions", "fields": ["user.name", "kibana.session.count"] }
+  ],
+  "refreshInterval": "15s"
+}

@@ -1,0 +1,37 @@
+# Filebeat configuration for forwarding logs to Logstash
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/apache2/access.log
+    - /var/log/apache2/error.log
+    - /var/log/nginx/access.log
+    - /var/log/nginx/error.log
+    - /var/log/auth.log
+    - /var/log/syslog
+  fields:
+    environment: production
+  fields_under_root: true
+
+filebeat.config.modules:
+  path: "/usr/share/filebeat/modules.d/*.yml"
+  reload.enabled: true
+  reload.period: 10s
+
+setup.template.settings:
+  index.number_of_shards: 3
+  index.number_of_replicas: 1
+
+output.logstash:
+  hosts: ["localhost:5044"]
+  ssl.enabled: true
+  ssl.certificate_authorities: ["/etc/filebeat/certs/ca.crt"]
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644

@@ -1,0 +1,12 @@
+{
+  "title": "Security Overview",
+  "description": "Main SOC dashboard with critical alerts, event trends, and system health.",
+  "panels": [
+    { "type": "metric", "title": "Critical Alerts", "field": "alert.severity", "filter": "alert.severity:critical" },
+    { "type": "timeseries", "title": "Event Timeline", "field": "@timestamp", "index": "logstash-*" },
+    { "type": "table", "title": "Top Attack Sources", "fields": ["source.ip", "event.category", "event.severity"] },
+    { "type": "pie", "title": "Severity Distribution", "field": "alert.severity" }
+  ],
+  "filters": ["environment:production"],
+  "refreshInterval": "10s"
+}

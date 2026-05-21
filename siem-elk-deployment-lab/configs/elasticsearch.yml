@@ -1,0 +1,68 @@
+# Elasticsearch Configuration for SIEM Cluster
+# Production-grade settings for high-volume log ingestion
+
+cluster.name: siem-production
+node.name: node-1
+
+# Node roles
+node.roles: [master, data]
+
+# Network settings
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# Cluster discovery
+discovery.seed_hosts: ["node-1:9300", "node-2:9300", "node-3:9300"]
+cluster.initial_master_nodes: ["node-1", "node-2", "node-3"]
+
+# Performance tuning
+indices.memory.index_buffer_size: 30%
+thread_pool.search.queue_size: 1000
+thread_pool.write.queue_size: 1000
+
+# Index settings
+action.destructive_requires_name: true
+indices.lifecycle.poll_interval: 10m
+
+# Logging
+logger.level: INFO
+logger.org.elasticsearch: WARN
+
+# Security (X-Pack)
+xpack.security.enabled: true
+xpack.security.authc.api_key.enabled: true
+
+# Encryption
+xpack.security.transport.ssl:
+  enabled: true
+  verification_mode: certificate
+  keystore.path: /etc/elasticsearch/certs/elastic-certificates.p12
+  truststore.path: /etc/elasticsearch/certs/elastic-certificates.p12
+
+xpack.security.http.ssl:
+  enabled: true
+  verification_mode: certificate
+  keystore.path: /etc/elasticsearch/certs/elastic-certificates.p12
+  truststore.path: /etc/elasticsearch/certs/elastic-certificates.p12
+
+# Monitoring
+xpack.monitoring.collection.enabled: true
+xpack.monitoring.metrics.period: 10s
+
+# Machine Learning
+xpack.ml.enabled: true
+xpack.ml.max_open_jobs: 20
+
+# Snapshot repository for backups
+repositories.backup.settings:
+  location: /mnt/elasticsearch-backups
+  compress: true
+  chunk_size: 100mb
+  max_restore_bytes_per_sec: 40mb
+  max_snapshot_bytes_per_sec: 40mb
+
+# JVM settings should be in jvm.options:
+# -Xms16g
+# -Xmx16g
+# (Set heap to 50% of available RAM, max 31GB)

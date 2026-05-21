@@ -1,0 +1,17 @@
+{
+  "name": "Intrusion Detection Alert",
+  "description": "Detects repeated failed logins and suspicious network activity.",
+  "conditions": [
+    {
+      "type": "threshold",
+      "query": "service:sshd AND event.outcome:failure",
+      "threshold": 5,
+      "timeframe": "5m"
+    }
+  ],
+  "actions": [
+    { "type": "email", "to": ["soc-team@example.com"] },
+    { "type": "webhook", "url": "https://incident-handler.local/api/alerts" }
+  ],
+  "severity": "high"
+}

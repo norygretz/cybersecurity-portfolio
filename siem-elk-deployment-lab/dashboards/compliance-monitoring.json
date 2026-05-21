@@ -1,0 +1,11 @@
+{
+  "title": "Compliance Monitoring",
+  "description": "Dashboard tracking regulatory log coverage and audit events.",
+  "panels": [
+    { "type": "metric", "title": "PCI-DSS Failures", "field": "compliance.status", "filter": "compliance.standard:PCI-DSS AND compliance.result:fail" },
+    { "type": "table", "title": "Sensitive Data Access", "fields": ["user.name", "data.classification", "event.action"] },
+    { "type": "timeseries", "title": "Audit Log Volume", "field": "@timestamp", "index": "logstash-*" },
+    { "type": "bar", "title": "Policy Violations by Type", "field": "policy.violation_type" }
+  ],
+  "refreshInterval": "30s"
+}

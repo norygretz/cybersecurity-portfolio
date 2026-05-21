@@ -1,0 +1,12 @@
+{
+  "title": "Threat Detection",
+  "description": "Dashboard focused on active attack patterns and malicious actors.",
+  "panels": [
+    { "type": "table", "title": "Active Threats", "fields": ["event.type", "source.ip", "destination.ip", "severity"] },
+    { "type": "gauge", "title": "SQL Injection Attempts", "field": "is_sql_injection", "aggregation": "sum" },
+    { "type": "gauge", "title": "XSS Attempts", "field": "is_xss_attempt", "aggregation": "sum" },
+    { "type": "map", "title": "Attack Origin Map", "field": "source.ip" }
+  ],
+  "filters": ["event.category:threat"],
+  "refreshInterval": "15s"
+}

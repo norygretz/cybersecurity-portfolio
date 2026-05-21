@@ -1,0 +1,18 @@
+{
+  "name": "Threat Hunting Rule Set",
+  "description": "Advanced search rules for proactive threat hunting and IOC discovery.",
+  "conditions": [
+    {
+      "type": "match",
+      "query": "process.name:cmd.exe OR process.name:ps.exe OR event.category:credential_access"
+    },
+    {
+      "type": "match",
+      "query": "http.request.uri:(\"/wp-admin\" OR \"/xmlrpc.php\")"
+    }
+  ],
+  "actions": [
+    { "type": "index", "index": "threat-hunting-results" }
+  ],
+  "severity": "informational"
+}
