@@ -8,7 +8,7 @@ This is my professional cybersecurity portfolio demonstrating practical skills t
 **Updated**: May 2026 (6 Projects)  
 **Portfolio Owner**: Nourhane Saudie  
 **Skill Level**: Intermediate/Advanced  
-**Target Audience**: Security professionals, hiring managers, technical interviewers  
+
 
 ---
 
